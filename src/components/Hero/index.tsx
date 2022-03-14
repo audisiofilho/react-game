@@ -1,38 +1,20 @@
 import React, { useState } from "react";
 import useEventListener from "@use-it/event-listener";
-import { TILE_SIZE, HEAD_OFFSET } from "../../settings/constants";
+import { TILE_SIZE, HEAD_OFFSET, EDirection } from "../../settings/constants";
 
 import "./index.css";
+import useHeroMoviment from "../../hooks/useHeroMoviment";
+
+const initialPosition = {
+  x: 15,
+  y: 15,
+};
 
 const Hero = () => {
-  const [heroPosition, setHeroPosition] = useState({ x: 15, y: 15 });
-  const [direction, setDirection] = useState("RIGHT");
+  const {heroPosition, direction} = useHeroMoviment(initialPosition);
 
-  useEventListener("keydown", (event: KeyboardEvent): void => {
-    if (event.key === "ArrowLeft") {
-      setHeroPosition({
-        x: heroPosition.x - 1,
-        y: heroPosition.y,
-      });
-      setDirection("LEFT");
-    } else if (event.key === "ArrowRight") {
-      setHeroPosition({
-        x: heroPosition.x + 1,
-        y: heroPosition.y,
-      });
-      setDirection("RIGHT");
-    } else if (event.key === "ArrowUp") {
-      setHeroPosition({
-        x: heroPosition.x,
-        y: heroPosition.y + 1,
-      });
-    } else if (event.key === "ArrowDown") {
-      setHeroPosition({
-        x: heroPosition.x,
-        y: heroPosition.y - 1,
-      });
-    }
-  });
+  
+  
 
   return (
     <div
@@ -46,7 +28,7 @@ const Hero = () => {
         position: "absolute",
         bottom: TILE_SIZE * heroPosition.y,
         left: TILE_SIZE * heroPosition.x,
-        transform: `scaleX(${direction === "RIGHT" ? 1 : -1})`,
+        transform: `scaleX(${direction === EDirection.RIGHT ? 1 : -1})`,
       }}
     />
   );
