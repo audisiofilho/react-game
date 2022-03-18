@@ -9,6 +9,11 @@ export default function useHeroMoviment(initialPosition) {
 
   useEventListener("keydown", (event: KeyboardEvent): void => {
     const direction = event.key as EDirection;
+
+    if(direction.indexOf("Arrow") === -1 ){
+      return;
+    }
+
     const nextMoviment = handleNextPosition(direction, heroPosition);
     setHeroPosition(nextMoviment);
     setDirection(direction);
