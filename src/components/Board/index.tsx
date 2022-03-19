@@ -10,7 +10,8 @@ import Trap from "../Trap";
 const Board = () => {
   return (
     <div>
-      <MiniDemon />
+      <MiniDemon initialPosition={{x: 10, y: 10}}/>
+      <MiniDemon initialPosition={{x: 10, y: 8}}/>
       <Demon />
       <Chest />
       <Trap />

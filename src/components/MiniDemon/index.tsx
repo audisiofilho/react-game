@@ -4,12 +4,13 @@ import { TILE_SIZE, HEAD_OFFSET, EDirection } from "../../settings/constants";
 
 import "./index.css";
 
-const MiniDemon = () => {
-  const initialPosition = {
-    x: 10,
-    y: 5,
-  };
-  const { enemyPosition, direction } = useEnemyMoviment(initialPosition);
+
+interface IProps {
+  initialPosition:{x: number; y: number}
+}
+
+const MiniDemon = (props: IProps) => {
+  const moviment = useEnemyMoviment(props.initialPosition);
   return (
     <div
       style={{
@@ -20,9 +21,9 @@ const MiniDemon = () => {
         animation: "mini-demon-animation 1s steps(4) infinite",
         position: "absolute",
         backgroundPosition: `0px -${TILE_SIZE - HEAD_OFFSET}px`,
-        bottom: TILE_SIZE * enemyPosition.y,
-        left: TILE_SIZE * enemyPosition.x,
-        transform: `scaleX(${direction === EDirection.RIGHT ? 1 : -1})`,
+        bottom: TILE_SIZE * moviment.enemyPosition.y,
+        left: TILE_SIZE * moviment.enemyPosition.x,
+        transform: `scaleX(${moviment.direction === EDirection.RIGHT ? 1 : -1})`,
       }}
     />
   );
