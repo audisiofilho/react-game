@@ -26,7 +26,7 @@ const Hero = () => {
         backgroundPosition: `0px -${TILE_SIZE - HEAD_OFFSET}px`,
         animation: "hero-animation 1s steps(4) infinite",
         position: "absolute",
-        bottom: TILE_SIZE * heroPosition.y,
+        top: TILE_SIZE * heroPosition.y,
         left: TILE_SIZE * heroPosition.x,
         transform: `scaleX(${direction === EDirection.RIGHT ? 1 : -1})`,
       }}

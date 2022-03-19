@@ -20,7 +20,7 @@ const Demon = () => {
         backgroundRepeat: "no-repeat",
         animation: "demon-animation 1s steps(4) infinite",
         position: "absolute",
-        bottom: TILE_SIZE * enemyPosition.y,
+        top: TILE_SIZE * enemyPosition.y,
         left: TILE_SIZE * enemyPosition.x,
         transform: `scaleX(${direction === EDirection.RIGHT ? 1 : -1})`,
       }}
