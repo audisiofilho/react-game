@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import useEventListener from "@use-it/event-listener";
 import { EDirection } from "../../settings/constants";
-import handleNextPosition from "../../contexts/canvas/helpers";
+import {
+  handleNextPosition,
+  checkValidMoviment,
+} from "../../contexts/canvas/helpers";
 
 export default function useHeroMoviment(initialPosition) {
   const [heroPosition, setHeroPosition] = useState(initialPosition);
@@ -10,13 +13,17 @@ export default function useHeroMoviment(initialPosition) {
   useEventListener("keydown", (event: KeyboardEvent): void => {
     const direction = event.key as EDirection;
 
-    if(direction.indexOf("Arrow") === -1 ){
+    if (direction.indexOf("Arrow") === -1) {
       return;
     }
 
     const nextMoviment = handleNextPosition(direction, heroPosition);
-    setHeroPosition(nextMoviment);
-    setDirection(direction);
+    const isValidMoviment = checkValidMoviment(nextMoviment);
+
+    if (isValidMoviment) {
+      setHeroPosition(nextMoviment);
+      setDirection(direction);
+    }
   });
 
   return {

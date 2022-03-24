@@ -4,13 +4,22 @@ import { TILE_SIZE, DEMON_TILE_SIZE, EDirection } from "../../settings/constants
 
 import "./index.css";
 
-const Demon = () => {
-  const initialPosition = {
-    x: 5,
-    y: 5,
-  };
+/*
 
-  const { enemyPosition, direction } = useEnemyMoviment(initialPosition);
+const moviment = {
+  position: { x: 5, y: 5},
+  direction: EDirection.RIGHT,
+};
+
+*/
+
+interface IProps {
+  initialPosition: { x:number, y:number}
+}
+
+const Demon = (props: IProps) => {
+
+  const moviment = useEnemyMoviment(props.initialPosition);
   return (
     <div
       style={{
@@ -20,9 +29,9 @@ const Demon = () => {
         backgroundRepeat: "no-repeat",
         animation: "demon-animation 1s steps(4) infinite",
         position: "absolute",
-        top: TILE_SIZE * enemyPosition.y,
-        left: TILE_SIZE * enemyPosition.x,
-        transform: `scaleX(${direction === EDirection.RIGHT ? 1 : -1})`,
+        top: TILE_SIZE * moviment.enemyPosition.y,
+        left: TILE_SIZE * moviment.enemyPosition.x,
+        transform: `scaleX(${moviment.direction === EDirection.RIGHT ? 1 : -1})`,
       }}
     />
   );

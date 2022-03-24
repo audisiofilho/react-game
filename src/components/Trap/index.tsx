@@ -3,7 +3,20 @@ import { TILE_SIZE, HEAD_OFFSET } from "../../settings/constants";
 
 import './index.css';
 
-const Trap = () => {
+/*
+
+const moviment = {
+  position: { x: 5, y: 5},
+  direction: EDirection.RIGHT,
+};
+
+*/
+
+interface IProps {
+  initialPosition: { x:number, y:number}
+}
+
+const Trap = (props: IProps) => {
   return (
     <div
       style={{
@@ -13,8 +26,8 @@ const Trap = () => {
         backgroundRepeat: 'no-repeat',
         animation: 'trap-animation 1s steps(8) infinite',
         position: "absolute",
-        top: TILE_SIZE * 10,
-        left: TILE_SIZE * 9,
+        top: TILE_SIZE * props.initialPosition.y,
+        left: TILE_SIZE * props.initialPosition.x,
       }}
     />
   );

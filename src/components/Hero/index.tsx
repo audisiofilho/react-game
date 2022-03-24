@@ -5,13 +5,21 @@ import { TILE_SIZE, HEAD_OFFSET, EDirection } from "../../settings/constants";
 import "./index.css";
 import useHeroMoviment from "../../hooks/useHeroMoviment";
 
-const initialPosition = {
-  x: 15,
-  y: 15,
+/*
+
+const moviment = {
+  position: { x: 5, y: 5},
+  direction: EDirection.RIGHT,
 };
 
-const Hero = () => {
-  const {heroPosition, direction} = useHeroMoviment(initialPosition);
+*/
+
+interface IProps {
+  initialPosition: { x:number, y:number}
+}
+
+const Hero = (props: IProps) => {
+  const {heroPosition, direction} = useHeroMoviment(props.initialPosition);
 
   
   
@@ -26,7 +34,7 @@ const Hero = () => {
         backgroundPosition: `0px -${TILE_SIZE - HEAD_OFFSET}px`,
         animation: "hero-animation 1s steps(4) infinite",
         position: "absolute",
-        top: TILE_SIZE * heroPosition.y,
+        top: TILE_SIZE * heroPosition.y - HEAD_OFFSET,
         left: TILE_SIZE * heroPosition.x,
         transform: `scaleX(${direction === EDirection.RIGHT ? 1 : -1})`,
       }}
